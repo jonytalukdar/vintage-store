@@ -11,10 +11,12 @@ import Login from './pages/Login';
 import Products from './pages/Products';
 import ProductsDetails from './pages/ProductDetails';
 
+import Header from './components/Header';
 //component
 const App = () => {
   return (
     <>
+      <Header />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
