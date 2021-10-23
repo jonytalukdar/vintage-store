@@ -7,10 +7,10 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import ProductProvider from './context/products-context';
 
 ReactDOM.render(
-  <ProductProvider>
-    <Router>
+  <Router>
+    <ProductProvider>
       <App />
-    </Router>
-  </ProductProvider>,
+    </ProductProvider>
+  </Router>,
   document.getElementById('root')
 );

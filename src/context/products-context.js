@@ -1,6 +1,7 @@
-import axios from 'axios';
 import { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 import url from '../utils/URL';
+
 export const ProductContext = createContext({
   // for auto suggessation
   loading: false,
@@ -15,14 +16,16 @@ const ProductProvider = ({ children }) => {
   const [featured, setFeatured] = useState([]);
 
   useEffect(() => {
-    axios.get(`${url}/products`).then((data) => console.log(data));
+    axios.get(`${url}/products`).then((response) => {
+      setProducts(response.data);
+    });
     return () => {};
   }, []);
 
   const context = {
-    loading,
-    products,
-    featured,
+    loading: loading,
+    products: products,
+    featured: featured,
   };
 
   return (
