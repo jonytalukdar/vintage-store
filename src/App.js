@@ -15,14 +15,16 @@ import ProductsDetails from './pages/ProductDetails';
 const App = () => {
   return (
     <>
-      <Route exact path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/cart" component={Cart} />
-      <Route exact path="/products" component={Products} />
-      <Route path="/products/:id" component={ProductsDetails} />
-      <Route path="/login" component={Login} />
-      <Route path="/checkout" component={Checkout} />
-      <Route exact path="*" component={Error} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/cart" component={Cart} />
+        <Route exact path="/products" component={Products} />
+        <Route path="/products/:id" component={ProductsDetails} />
+        <Route path="/login" component={Login} />
+        <Route path="/checkout" component={Checkout} />
+        <Route exact path="*" component={Error} />
+      </Switch>
     </>
   );
 };
