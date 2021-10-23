@@ -1,9 +1,23 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 
-export const ProductContext = createContext();
+export const ProductContext = createContext({
+  // for auto suggessation
+  loading: false,
+  products: [],
+  featured: [],
+});
 
 const ProductProvider = ({ children }) => {
-  const context = {};
+  //state
+  const [loading, setLoading] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [featured, setFeatured] = useState([]);
+
+  const context = {
+    loading,
+    products,
+    featured,
+  };
 
   return (
     <ProductContext.Provider value={context}>
