@@ -5,11 +5,14 @@ import App from './App';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 import ProductProvider from './context/products-context';
+import CartProvider from './context/cart-context';
 
 ReactDOM.render(
   <Router>
     <ProductProvider>
-      <App />
+      <CartProvider>
+        <App />
+      </CartProvider>
     </ProductProvider>
   </Router>,
   document.getElementById('root')
