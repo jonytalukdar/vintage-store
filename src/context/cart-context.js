@@ -52,7 +52,19 @@ const CartProvider = ({ children }) => {
   };
 
   // decrease item
-  const decreaseAmountHandler = (id) => {};
+  const decreaseAmountHandler = (id, amount) => {
+    if (amount === 1) {
+      removeItemHandler(id);
+      return;
+    } else {
+      const newCart = [...cart].map((item) => {
+        return item.id === id
+          ? { ...item, amount: item.amount - 1 }
+          : { ...item };
+      });
+      setCart(newCart);
+    }
+  };
 
   //  add cart
   const addToCartHandler = (product) => {};
