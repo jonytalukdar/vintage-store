@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { useHistory, useParams } from 'react-router';
 import Loading from '../components/Loading';
+import { CartContext } from '../context/cart-context';
 import { ProductContext } from '../context/products-context';
 
 const ProductDetails = () => {
   const { products } = useContext(ProductContext);
+  const { addToCart } = useContext(CartContext);
 
   const { id } = useParams();
   const history = useHistory();
@@ -30,7 +32,7 @@ const ProductDetails = () => {
           <button
             className="btn btn-primary btn-block"
             onClick={() => {
-              //... add to cart
+              addToCart(product);
               history.push('/cart');
             }}
           >

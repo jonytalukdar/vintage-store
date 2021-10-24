@@ -14,7 +14,7 @@ export const CartContext = createContext({
 });
 
 const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(localCart);
+  const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(0);
 
@@ -67,10 +67,24 @@ const CartProvider = ({ children }) => {
   };
 
   //  add cart
-  const addToCartHandler = (product) => {};
+  const addToCartHandler = (product) => {
+    const { id, title, image: url, price } = product;
+
+    const item = [...cart].find((item) => item.id === id);
+    if (item) {
+      increaseAmountHandler(id);
+      return;
+    } else {
+      const newItem = { id, title, image: url.url, price, amount: 1 };
+      const newCart = [...cart, { ...newItem }];
+      setCart(newCart);
+    }
+  };
 
   //  clear cart
-  const clearCartHandler = () => {};
+  const clearCartHandler = () => {
+    setCart([]);
+  };
 
   const context = {
     cart,
