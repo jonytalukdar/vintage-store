@@ -16,8 +16,6 @@ const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [featured, setFeatured] = useState([]);
 
-  console.log(featured);
-
   useEffect(() => {
     setLoading(true);
     axios.get(`${url}/products`).then((response) => {
