@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react';
-import localCart from '../utils/localCart';
 
 export const CartContext = createContext({
   // for auto suggession
@@ -13,14 +12,20 @@ export const CartContext = createContext({
   clearCart: () => {},
 });
 
+const getCartFormLocalStorage = () => {
+  return localStorage.getItem('cart')
+    ? JSON.parse(localStorage.getItem('cart'))
+    : [];
+};
+
 const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(getCartFormLocalStorage());
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(0);
 
   useEffect(() => {
     //local storage
-
+    localStorage.setItem('cart', JSON.stringify(cart));
     //cart Items
     let newItems = cart.reduce((total, cartItem) => {
       return (total += cartItem.amount);
