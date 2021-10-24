@@ -6,7 +6,6 @@ export default function Product({ item }) {
     id,
     title,
     price,
-    description,
     image: { url },
   } = item;
   return (
