@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.svg';
+import CartLink from './Cart/CartLink';
 
 const Header = () => {
   return (
@@ -23,9 +24,10 @@ const Header = () => {
             <li>
               <Link to="/login">Login</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/cart">Cart</Link>
-            </li>
+            </li> */}
+            <CartLink />
           </div>
         </ul>
       </nav>
