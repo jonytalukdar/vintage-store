@@ -6,10 +6,10 @@ export const CartContext = createContext({
   cart: [],
   total: 0,
   cartItems: 0,
-  removeItem: () => {},
-  increase: () => {},
-  decrease: () => {},
-  addToCart: () => {},
+  removeItem: (id) => {},
+  increase: (id) => {},
+  decrease: (id) => {},
+  addToCart: (product) => {},
   clearCart: () => {},
 });
 
@@ -36,7 +36,10 @@ const CartProvider = ({ children }) => {
   }, [cart]);
 
   // remove item
-  const removeItemHandler = (id) => {};
+  const removeItemHandler = (id) => {
+    const removedCartItem = [...cart].filter((item) => item.id !== id);
+    setCart(removedCartItem);
+  };
 
   //  Increase amount
   const increaseAmountHandler = (id) => {};
