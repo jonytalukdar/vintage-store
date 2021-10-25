@@ -9,7 +9,7 @@ import registerUser from '../strapi/registerUser';
 const Login = () => {
   const history = useHistory();
   //setup user context
-  const { userLogin } = useContext(UserContext);
+  const { userLogin, showAlert } = useContext(UserContext);
   // state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,9 +44,16 @@ const Login = () => {
       const user = { token, username };
       userLogin(user);
       history.push('/products');
-    } else {
-      // alert something
       console.log(response);
+      showAlert({
+        msg: `Thank you ${username}.  shop away my friend`,
+        type: 'success',
+      });
+    } else {
+      showAlert({
+        msg: 'Somethign went wrong please try again',
+        type: 'danger',
+      });
     }
   };
 
