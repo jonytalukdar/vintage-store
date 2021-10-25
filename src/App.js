@@ -12,11 +12,13 @@ import Products from './pages/Products';
 import ProductsDetails from './pages/ProductDetails';
 
 import Header from './components/Header';
+import Alert from './components/Alert';
 //component
 const App = () => {
   return (
     <>
       <Header />
+      <Alert />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
