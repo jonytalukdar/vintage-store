@@ -9,7 +9,8 @@ import registerUser from '../strapi/registerUser';
 const Login = () => {
   const history = useHistory();
   //setup user context
-  const { userLogin, showAlert } = useContext(UserContext);
+  const { userLogin, alert, showAlert } = useContext(UserContext);
+
   // state
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,6 +29,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     // alert
+    showAlert({ msg: 'Accessing user data please wait...' });
     e.preventDefault();
     let response;
     if (isMember) {
@@ -44,7 +46,6 @@ const Login = () => {
       const user = { token, username };
       userLogin(user);
       history.push('/products');
-      console.log(response);
       showAlert({
         msg: `Thank you ${username}.  shop away my friend`,
         type: 'success',
@@ -104,7 +105,11 @@ const Login = () => {
         )}
         {/* submit button */}
         {!isEmpty && (
-          <button type="submit" className="btn btn-primary btn-block">
+          <button
+            type="submit"
+            className="btn btn-primary btn-block"
+            disabled={alert.show}
+          >
             submit
           </button>
         )}

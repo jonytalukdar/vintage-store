@@ -527,6 +527,13 @@ Login Form
   color: var(--darkGrey);
   border-color: var(--darkGrey);
 }
+
+button:disabled,
+button[disabled] {
+  background-color: #796c6c;
+  color: #666666;
+  cursor: not-allowed;
+}
 /* 
 ====== 
 Login Button
