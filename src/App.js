@@ -13,6 +13,7 @@ import ProductsDetails from './pages/ProductDetails';
 
 import Header from './components/Header';
 import Alert from './components/Alert';
+import PrivateRoute from './components/PrivateRoute';
 //component
 const App = () => {
   return (
@@ -26,7 +27,10 @@ const App = () => {
         <Route exact path="/products" component={Products} />
         <Route path="/products/:id" component={ProductsDetails} />
         <Route path="/login" component={Login} />
-        <Route path="/checkout" component={Checkout} />
+        {/* <PrivateRoute path="/checkout" component={Checkout} /> */}
+        <PrivateRoute path="/checkout" hello="hello">
+          <Checkout />
+        </PrivateRoute>
         <Route exact path="*" component={Error} />
       </Switch>
     </>
