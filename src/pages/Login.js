@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
+// strapi function
+import loginUser from '../strapi/loginUser';
+import registerUser from '../strapi/registerUser';
+
 const Login = () => {
   const history = useHistory();
 
@@ -10,16 +14,33 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('default');
-  const [isMember, setIsMember] = useState(false);
+  const [isMember, setIsMember] = useState(true);
 
-  let isEmpty = false;
+  let isEmpty = !email || !password || !username;
 
   const isMemberToggleHandler = () => {
-    setIsMember(!isMember);
+    setIsMember((prevState) => {
+      let isMember = !prevState;
+      isMember ? setUsername('default') : setUsername('');
+      return isMember;
+    });
   };
 
   const handleSubmit = async (e) => {
+    // alert
     e.preventDefault();
+    let response;
+    if (isMember) {
+      //response = await loginUser()
+    } else {
+      // response = await registerUser()
+    }
+
+    if (response) {
+      //alert something
+    } else {
+      // alert something
+    }
   };
 
   return (
@@ -45,7 +66,7 @@ const Login = () => {
             type="password"
             id="password"
             value={password}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         {/* end of single input */}
