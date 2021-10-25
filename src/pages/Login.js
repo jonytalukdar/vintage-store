@@ -31,7 +31,7 @@ const Login = () => {
     e.preventDefault();
     let response;
     if (isMember) {
-      //response = await loginUser()
+      response = await loginUser({ email, password });
     } else {
       response = await registerUser({ email, password, username });
     }
@@ -42,6 +42,7 @@ const Login = () => {
       console.log(response);
     } else {
       // alert something
+      console.log(response);
     }
   };
 
