@@ -6,12 +6,15 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ProductProvider from './context/products-context';
 import CartProvider from './context/cart-context';
+import UserProvider from './context/user-context';
 
 ReactDOM.render(
   <Router>
     <ProductProvider>
       <CartProvider>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </CartProvider>
     </ProductProvider>
   </Router>,
