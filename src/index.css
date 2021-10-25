@@ -297,6 +297,7 @@ Product List
   display: grid;
   grid-template-rows: auto 1fr;
   min-height: 19.69rem;
+  border-radius: 8px;
 }
 .product:hover {
   box-shadow: var(--darkShadow);
