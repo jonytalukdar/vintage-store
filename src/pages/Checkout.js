@@ -22,7 +22,53 @@ const Checkout = (props) => {
     return <EmptyCart />;
   }
 
-  return <div></div>;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <section className="section form">
+      <h2 className="section-title">Checkout</h2>
+      <form className="checkout-form" onSubmit={handleSubmit}>
+        <h3>
+          order total : <span>{total}</span>
+        </h3>
+        {/* single input */}
+        <div className="form-control">
+          <label htmlFor="name">name</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        {/* end single input */}
+        {/* card element */}
+        <div className="stripe-element">
+          <label htmlFor="card-element">Debit or Credit Card</label>
+          <p className="stripe-info">
+            Test using this card : <span>4242 4242 4242 4242</span>
+            <br />
+            enter 5 digits for zip code
+            <br />
+            enter any 3 digits for CVC
+          </p>
+        </div>
+        {/* end card element */}
+
+        {/* stripe element */}
+        {error && <p className="form-empty">{error}</p>}
+        {/* empty value */}
+        {isEmpty ? (
+          <p className="form-empty">Please fill out all input</p>
+        ) : (
+          <button className="btn btn-primary btn-block">Submit</button>
+        )}
+
+        {/* end stripe element */}
+      </form>
+    </section>
+  );
 };
 
 export default Checkout;
