@@ -2,6 +2,12 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import { CartContext } from '../context/cart-context';
 import { UserContext } from '../context/user-context';
+import {
+  CardElement,
+  StripeProvider,
+  Elements,
+  injectStripe,
+} from 'react-stripe-elements';
 import EmptyCart from '../components/Cart/EmptyCart';
 
 //strapi elements
@@ -57,6 +63,7 @@ const Checkout = (props) => {
         {/* end card element */}
 
         {/* stripe element */}
+        <CardElement className="card-element"></CardElement>
         {error && <p className="form-empty">{error}</p>}
         {/* empty value */}
         {isEmpty ? (
@@ -71,4 +78,16 @@ const Checkout = (props) => {
   );
 };
 
-export default Checkout;
+const CardForm = injectStripe(Checkout);
+
+const StripeWrapper = () => {
+  return (
+    <StripeProvider apiKey="pk_test_51IejRfD0bRJfEs6TtIuwOYhg7gnqkkab83AkaDvidJmlHLNYoQWdrZfE4Y3gYPA8s7rbEk79jdAUBgEtynO283gH00Fbu9VLEq">
+      <Elements>
+        <CardForm></CardForm>
+      </Elements>
+    </StripeProvider>
+  );
+};
+
+export default StripeWrapper;
