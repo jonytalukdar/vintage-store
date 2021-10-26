@@ -28,8 +28,41 @@ const Checkout = (props) => {
     return <EmptyCart />;
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    showAlert({ msg: 'Submitting order... please wait' });
     e.preventDefault();
+
+    const response = await props.stripe
+      .createToken()
+      .catch((error) => console.log(error));
+
+    const { token } = response;
+    if (token) {
+      setError('');
+      const { id } = token;
+      let order = await submitOrder({
+        name: name,
+        total: total,
+        items: cart,
+        stripeTokenId: id,
+        userTokenId: user.token,
+      });
+
+      if (order) {
+        showAlert({ msg: 'Your order is completed, thanks for your order' });
+        clearCart();
+        history.push('/');
+        return;
+      } else {
+        showAlert({
+          msg: 'There is a problem with your order. Please try again!',
+          type: 'danger',
+        });
+      }
+    } else {
+      hideAlert();
+      setError(response.error.message);
+    }
   };
 
   return (
@@ -69,7 +102,9 @@ const Checkout = (props) => {
         {isEmpty ? (
           <p className="form-empty">Please fill out all input</p>
         ) : (
-          <button className="btn btn-primary btn-block">Submit</button>
+          <button type="submit" className="btn btn-primary btn-block">
+            Submit
+          </button>
         )}
 
         {/* end stripe element */}
