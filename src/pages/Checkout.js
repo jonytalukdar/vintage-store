@@ -1,47 +1,43 @@
-import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router';
+import React from 'react';
 import { CartContext } from '../context/cart-context';
 import { UserContext } from '../context/user-context';
+import { useHistory } from 'react-router-dom';
+import EmptyCart from '../components/Cart/EmptyCart';
 import {
   CardElement,
   StripeProvider,
   Elements,
   injectStripe,
 } from 'react-stripe-elements';
-import EmptyCart from '../components/Cart/EmptyCart';
-
-//strapi elements
 import submitOrder from '../strapi/submitOrder';
-
-const Checkout = (props) => {
+import { useContext } from 'react/cjs/react.development';
+function CheckoutPage(props) {
+  // cart context
   const { cart, total, clearCart } = useContext(CartContext);
-  const { user, alert, showAlert, hideAlert } = useContext(UserContext);
+
+  const { user, showAlert, hideAlert, alert } = useContext(UserContext);
   const history = useHistory();
+  // name field
+  const [name, setName] = React.useState('');
+  const [error, setError] = React.useState('');
+  // handle submit
+  const isEmpty = !name || alert.show;
 
-  // state values
-  const [name, setName] = useState('');
-  const [error, setError] = useState('');
-
-  let isEmpty = !name || alert.show;
-
-  if (cart.length < 1) {
-    return <EmptyCart />;
-  }
-
-  const handleSubmit = async (e) => {
-    showAlert({ msg: 'Submitting order... please wait' });
+  async function handleSubmit(e) {
+    showAlert({ msg: 'submitting order... please wait!' });
     e.preventDefault();
-
     const response = await props.stripe
       .createToken()
       .catch((error) => console.log(error));
+    console.log(response);
 
     const { token } = response;
     if (token) {
       setError('');
+
       const { id } = token;
       let order = await submitOrder({
-        name: name,
+        name,
         total: total,
         items: cart,
         stripeTokenId: id,
@@ -49,13 +45,13 @@ const Checkout = (props) => {
       });
 
       if (order) {
-        showAlert({ msg: 'Your order is completed, thanks for your order' });
+        showAlert({ msg: 'your order is complete' });
         clearCart();
         history.push('/');
         return;
       } else {
         showAlert({
-          msg: 'There is a problem with your order. Please try again!',
+          msg: 'there was an error with your order. please try again!',
           type: 'danger',
         });
       }
@@ -63,57 +59,64 @@ const Checkout = (props) => {
       hideAlert();
       setError(response.error.message);
     }
-  };
+  }
+
+  if (cart.length === 0) return <EmptyCart />;
 
   return (
     <section className="section form">
-      <h2 className="section-title">Checkout</h2>
-      <form className="checkout-form" onSubmit={handleSubmit}>
+      <h2 className="section-title">checkout</h2>
+      <form className="checkout-form">
         <h3>
-          order total : <span>{total}</span>
+          order total : <span> ${total}</span>
         </h3>
         {/* single input */}
         <div className="form-control">
-          <label htmlFor="name">name</label>
+          <label htmlFor="name">your name</label>
           <input
             type="text"
+            id="name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
           />
         </div>
-        {/* end single input */}
+        {/* end of single input  */}
         {/* card element */}
-        <div className="stripe-element">
-          <label htmlFor="card-element">Debit or Credit Card</label>
+        <div className="stripe-input">
+          <label htmlFor="card-element">Credit or Debit Card</label>
           <p className="stripe-info">
-            Test using this card : <span>4242 4242 4242 4242</span>
+            Test using this credit card : <span>4242 4242 4242 4242</span>
             <br />
-            enter 5 digits for zip code
+            enter any 5 digits for the zip code
             <br />
-            enter any 3 digits for CVC
+            enter any 3 digits for the CVC
           </p>
         </div>
-        {/* end card element */}
-
-        {/* stripe element */}
+        {/* card element */}
         <CardElement className="card-element"></CardElement>
+        {/*end of  card element */}
+        {/* stripe errors */}
         {error && <p className="form-empty">{error}</p>}
         {/* empty value */}
         {isEmpty ? (
-          <p className="form-empty">Please fill out all input</p>
+          <p className="form-empty">please fill out name field</p>
         ) : (
-          <button type="submit" className="btn btn-primary btn-block">
-            Submit
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="btn btn-primary btn-block"
+          >
+            submit
           </button>
         )}
-
-        {/* end stripe element */}
       </form>
     </section>
   );
-};
+}
 
-const CardForm = injectStripe(Checkout);
+const CardForm = injectStripe(CheckoutPage);
 
 const StripeWrapper = () => {
   return (
