@@ -28,7 +28,7 @@ const App = () => {
         <Route path="/products/:id" component={ProductsDetails} />
         <Route path="/login" component={Login} />
         {/* <PrivateRoute path="/checkout" component={Checkout} /> */}
-        <PrivateRoute path="/checkout" hello="hello">
+        <PrivateRoute path="/checkout">
           <Checkout />
         </PrivateRoute>
         <Route exact path="*" component={Error} />
