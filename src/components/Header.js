@@ -7,7 +7,7 @@ import CartLink from './Cart/CartLink';
 import LoginLink from './LoginLink';
 
 const Header = () => {
-  const { user, userLogout } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <header className="header">
@@ -31,9 +31,6 @@ const Header = () => {
             )}
           </div>
           <div>
-            {/* <li>
-              <Link to="/login">Login</Link>
-            </li> */}
             <LoginLink />
             <CartLink />
           </div>

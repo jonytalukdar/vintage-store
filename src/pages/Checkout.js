@@ -29,7 +29,6 @@ function CheckoutPage(props) {
     const response = await props.stripe
       .createToken()
       .catch((error) => console.log(error));
-    console.log(response);
 
     const { token } = response;
     if (token) {
