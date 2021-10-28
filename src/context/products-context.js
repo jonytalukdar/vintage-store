@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
-import url from '../utils/URL';
+import { url } from '../utils/URL';
 import { featuredProducts } from '../utils/helpers';
 
 export const ProductContext = createContext({

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import url from '../utils/URL';
+import { url } from '../utils/URL';
 
 const loginUser = async ({ email, password }) => {
   const response = await axios
