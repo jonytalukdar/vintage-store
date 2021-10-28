@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router';
+import { Route, Redirect } from 'react-router-dom';
 import { useContext } from 'react/cjs/react.development';
 import { UserContext } from '../context/user-context';
 
