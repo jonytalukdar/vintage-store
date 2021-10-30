@@ -4,8 +4,7 @@ import { useContext } from 'react/cjs/react.development';
 import { UserContext } from '../context/user-context';
 
 const ScrollButton = () => {
-  const { user } = useContext(UserContext);
-  let height = 200;
+  const { height } = useContext(UserContext);
 
   const scrollBackToTop = () => {
     window.scrollTo({

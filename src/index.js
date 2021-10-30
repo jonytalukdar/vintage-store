@@ -10,13 +10,13 @@ import UserProvider from './context/user-context';
 
 ReactDOM.render(
   <Router>
-    <ProductProvider>
-      <CartProvider>
-        <UserProvider>
+    <UserProvider>
+      <ProductProvider>
+        <CartProvider>
           <App />
-        </UserProvider>
-      </CartProvider>
-    </ProductProvider>
+        </CartProvider>
+      </ProductProvider>
+    </UserProvider>
   </Router>,
   document.getElementById('root')
 );

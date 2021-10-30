@@ -1,5 +1,4 @@
-import React, { createContext } from 'react';
-import { useState } from 'react/cjs/react.development';
+import React, { createContext, useEffect, useState } from 'react';
 
 /// get user from localStorage
 
@@ -16,6 +15,7 @@ export const UserContext = createContext({
   alert: {},
   showAlert: () => {},
   hideAlert: () => {},
+  height: 0,
 });
 
 const UserProvider = ({ children }) => {
@@ -24,6 +24,14 @@ const UserProvider = ({ children }) => {
     show: false,
     msg: '',
     type: 'success',
+  });
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener('scroll', () => {
+      setHeight(window.pageYOffset);
+    });
+    return () => window.removeEventListener('scroll', () => {});
   });
 
   //login
@@ -55,6 +63,7 @@ const UserProvider = ({ children }) => {
     alert,
     showAlert,
     hideAlert,
+    height,
   };
 
   return (
