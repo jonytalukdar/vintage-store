@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useReducer, useState } from 'react';
+import { ADDTOCART, CLEARCART, DECREASE, INCREASE, REMOVE } from './actions';
 import { reducer } from './reducer';
 export const CartContext = createContext({
   // for auto suggession
@@ -42,21 +43,21 @@ const CartProvider = ({ children }) => {
 
   // remove item
   const removeItemHandler = (id) => {
-    dispatch({ type: 'REMOVE', payload: id });
+    dispatch({ type: REMOVE, payload: id });
   };
 
   //  Increase amount
   const increaseAmountHandler = (id) => {
-    dispatch({ type: 'INCREASE', payload: id });
+    dispatch({ type: INCREASE, payload: id });
   };
 
   // decrease item
   const decreaseAmountHandler = (id, amount) => {
     if (amount === 1) {
-      dispatch({ type: 'REMOVE', payload: id });
+      dispatch({ type: REMOVE, payload: id });
       return;
     } else {
-      dispatch({ type: 'DECREASE', payload: id });
+      dispatch({ type: DECREASE, payload: id });
     }
   };
 
@@ -64,16 +65,16 @@ const CartProvider = ({ children }) => {
   const addToCartHandler = (product) => {
     let item = [...cart].find((item) => item.id === product.id);
     if (item) {
-      dispatch({ type: 'INCREASE', payload: product.id });
+      dispatch({ type: INCREASE, payload: product.id });
       return;
     } else {
-      dispatch({ type: 'ADDTOCART', payload: product });
+      dispatch({ type: ADDTOCART, payload: product });
     }
   };
 
   //  clear cart
   const clearCartHandler = () => {
-    dispatch({ type: 'CLEARCART' });
+    dispatch({ type: CLEARCART });
   };
 
   const context = {
