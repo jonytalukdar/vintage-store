@@ -19,7 +19,6 @@ export const UserContext = createContext({
 });
 
 const UserProvider = ({ children }) => {
-  //   const [user, setUser] = useState({ username: null, token: null });
   const [user, setUser] = useState(getUserFromLocalStorage());
   const [alert, setAlert] = useState({
     show: false,

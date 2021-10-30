@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory, useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router-dom';
 import Loading from '../components/Loading';
 import { CartContext } from '../context/cart-context';
 import { ProductContext } from '../context/products-context';

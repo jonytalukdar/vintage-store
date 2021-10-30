@@ -94,7 +94,7 @@ function CheckoutPage(props) {
           </p>
         </div>
         {/* card element */}
-        <CardElement className="card-element"></CardElement>
+        <CardElement className="card-element" />
         {/*end of  card element */}
         {/* stripe errors */}
         {error && <p className="form-empty">{error}</p>}
