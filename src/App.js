@@ -14,12 +14,14 @@ import ProductsDetails from './pages/ProductDetails';
 import Header from './components/Header';
 import Alert from './components/Alert';
 import PrivateRoute from './components/PrivateRoute';
+import ScrollButton from './components/ScrollButton';
 //component
 const App = () => {
   return (
     <>
       <Header />
       <Alert />
+      <ScrollButton />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/about" component={About} />
