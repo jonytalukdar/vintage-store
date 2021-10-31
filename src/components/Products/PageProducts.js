@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { ProductContext } from '../../context/products-context';
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from 'react-icons/fa';
 import ProductList from './ProductList';
 
 const PageProducts = () => {
@@ -11,6 +12,15 @@ const PageProducts = () => {
         <ProductList products={sorted[page]} />;
         {sorted.length > 1 && (
           <article className="pagination-buttons">
+            {/* prev button */}
+            {page > 0 && (
+              <button
+                className="prev-page-btn"
+                onClick={() => changePage(page - 1)}
+              >
+                <FaAngleDoubleLeft />
+              </button>
+            )}
             {sorted.map((_, index) => {
               return (
                 <button
@@ -22,6 +32,15 @@ const PageProducts = () => {
                 </button>
               );
             })}
+            {/* next button */}
+            {page < sorted.length - 1 && (
+              <button
+                className="next-page-btn"
+                onClick={() => changePage(page + 1)}
+              >
+                <FaAngleDoubleRight />
+              </button>
+            )}
           </article>
         )}
       </>
