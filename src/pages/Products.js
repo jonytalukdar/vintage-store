@@ -1,14 +1,21 @@
 import React, { useContext } from 'react';
 import { ProductContext } from '../context/products-context';
-import ProductList from '../components/Products/ProductList';
+
 import Loading from '../components/Loading';
+import Filters from '../components/Products/Filters';
+import PageProducts from '../components/Products/PageProducts';
 
 export default function Products() {
-  const { loading, sorted } = useContext(ProductContext);
+  const { loading } = useContext(ProductContext);
 
   if (loading) {
     return <Loading />;
   }
 
-  return <ProductList title="Our Products" products={sorted} />;
+  return (
+    <>
+      <Filters />
+      <PageProducts />
+    </>
+  );
 }
