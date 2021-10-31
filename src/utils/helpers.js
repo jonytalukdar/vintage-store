@@ -22,5 +22,5 @@ export const paginate = (products) => {
 
   // our code goes here
 
-  return products;
+  return newProducts;
 };
