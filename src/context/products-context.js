@@ -47,7 +47,21 @@ const ProductProvider = ({ children }) => {
   };
 
   const updateFilters = (e) => {
-    console.log(e);
+    const type = e.target.type;
+    const filter = e.target.name;
+    const value =
+      e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+
+    let filterValue;
+
+    if (type === 'radio') {
+      value === 'all' ? (filterValue = value) : (filterValue = parseInt(value));
+    } else {
+      filterValue = value;
+    }
+
+    console.log(type, filter, value);
+    setFilters({ ...filters, [filter]: filterValue });
   };
 
   const context = {
