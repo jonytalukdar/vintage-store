@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { url } from '../utils/URL';
-import { featuredProducts } from '../utils/helpers';
+import { featuredProducts, paginate } from '../utils/helpers';
 
 export const ProductContext = createContext({
   // for auto suggessation
@@ -34,7 +34,7 @@ const ProductProvider = ({ children }) => {
     setLoading(true);
     axios.get(`${url}/products`).then((response) => {
       setProducts(response.data);
-      setSorted(response.data);
+      setSorted(paginate(response.data));
       const featured = featuredProducts(response.data);
       setFeatured(featured);
       setLoading(false);
