@@ -43,7 +43,7 @@ const ProductProvider = ({ children }) => {
   }, []);
 
   const changePage = (index) => {
-    console.log(index);
+    setPage(index);
   };
 
   const updateFilters = (e) => {
