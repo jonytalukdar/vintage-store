@@ -85,7 +85,7 @@ const Filters = () => {
               checked={price === 300}
               onChange={updateFilters}
             />
-            $300 - $660
+            $300 - $650
           </label>
           <label htmlFor="price">
             <input
