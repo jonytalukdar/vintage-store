@@ -42,6 +42,13 @@ const ProductProvider = ({ children }) => {
     return () => {};
   }, []);
 
+  useEffect(() => {
+    let newProducts = [...products].sort((a, b) => a.price - b.price);
+
+    setPage(0);
+    setSorted(paginate(newProducts));
+  }, [filters, products]);
+
   const changePage = (index) => {
     setPage(index);
   };
@@ -60,7 +67,6 @@ const ProductProvider = ({ children }) => {
       filterValue = value;
     }
 
-    console.log(type, filter, value);
     setFilters({ ...filters, [filter]: filterValue });
   };
 
