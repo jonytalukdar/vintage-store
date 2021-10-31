@@ -10,10 +10,16 @@ export const featuredProducts = (data) => {
 export const paginate = (products) => {
   const itemsPerPage = 3;
   const numberOfPage = Math.ceil(products.length / itemsPerPage);
-  const newProducts = Array.from({ length: numberOfPage }, () => {
-    return products.splice(0, itemsPerPage);
+
+  // const newProducts = Array.from({ length: numberOfPage }, () => {
+  //   return products.splice(0, itemsPerPage);
+  // });
+
+  const newProducts = Array.from({ length: numberOfPage }, (_, index) => {
+    const start = index * itemsPerPage;
+    return products.slice(start, start + itemsPerPage);
   });
-  console.log(newProducts);
+
   // our code goes here
 
   return products;
